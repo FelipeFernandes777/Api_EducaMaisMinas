@@ -46,7 +46,6 @@ export default class LandingPageController {
   };
 
   public create = async (req: Request, res: Response) => {
-    
     try {
       const {
         full_name,
@@ -68,8 +67,9 @@ export default class LandingPageController {
         utm_source,
       };
 
-      const newCostumer = await this.service.createCostumer(data);
+      console.table(data)
 
+      const newCostumer = await this.service.createCostumer(data);
       res.status(201).send({
         message: "Lead registrado com sucesso",
         lead: newCostumer,

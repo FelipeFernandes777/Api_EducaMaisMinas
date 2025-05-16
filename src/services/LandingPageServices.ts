@@ -23,20 +23,18 @@ export default class LandingPageServices {
       return e;
     }
   }
-
   public async createCostumer(data: ICreateCostumerDTO) {
-    console.log("Service", data)
     try {
-      if (
-        !data.full_name ||
-        !data.graduation ||
-        !data.phone ||
-        !data.promotion_name ||
-        !data.promotion_price ||
-        !data.promotion_quantity
-      ) {
-        throw new Error("Todos os campos são necessarios");
-      }
+      // if (
+      //   !data.full_name ||
+      //   !data.graduation ||
+      //   !data.phone ||
+      //   !data.promotion_name ||
+      //   !data.promotion_price ||
+      //   !data.promotion_quantity
+      // ) {
+      //   throw new Error("Todos os campos são necessarios");
+      // }
 
       const newCostumer = await db.costumer.create({
         data: data,
@@ -44,6 +42,7 @@ export default class LandingPageServices {
 
       return newCostumer;
     } catch (e) {
+      console.error(e)
       return e;
     }
   }
