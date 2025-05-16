@@ -12,7 +12,7 @@ export class LandingPageRouter {
   public routes() {
     this.router.get("/get/:id", this.controller.get);
     this.router.get("/getAll", this.controller.getAll);
-    this.router.post("/create", this.controller.create);
+    this.router.post("/send", this.controller.create);
     this.router.delete("/delete/:id", this.controller.delete);
   }
 

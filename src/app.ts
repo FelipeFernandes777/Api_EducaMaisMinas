@@ -13,7 +13,11 @@ export default class Aplication {
 
   private configServer() {
     this.app.use(express.json());
-    this.app.use(cors());
+    this.app.use(cors({
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      methods: ["GET", "POST", "UPDATE", "DELETE"],
+      origin: "*",
+    }));
   }
 
   public listen(port: number, message?: string) {

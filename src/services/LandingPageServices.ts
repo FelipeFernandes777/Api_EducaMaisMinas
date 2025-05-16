@@ -1,17 +1,12 @@
-import { Repository } from "../config/db";
+import { db } from "../config/db";
 import { ICreateCostumerDTO } from "../dtos/createCostumerDTO";
 
 export default class LandingPageServices {
-  private readonly repository = new Repository();
+  constructor(  private readonly repository = db) {}
 
   public async getAllCostumers() {
     try {
-      return await this.repository.costumerRepository().findMany({
-        select: {
-          id: false,
-          updated_at: false,
-        },
-      });
+      return await db.costumer.findMany();
     } catch (e) {
       return e;
     }
@@ -19,7 +14,7 @@ export default class LandingPageServices {
 
   public async findOneCostumer(costumerID: number) {
     try {
-      return await this.repository.costumerRepository().findFirst({
+      return await db.costumer.findFirst({
         where: {
           id: costumerID,
         },
@@ -30,6 +25,7 @@ export default class LandingPageServices {
   }
 
   public async createCostumer(data: ICreateCostumerDTO) {
+    console.log("Service", data)
     try {
       if (
         !data.full_name ||
@@ -42,7 +38,7 @@ export default class LandingPageServices {
         throw new Error("Todos os campos são necessarios");
       }
 
-      const newCostumer = await this.repository.costumerRepository().create({
+      const newCostumer = await db.costumer.create({
         data: data,
       });
 
@@ -54,7 +50,7 @@ export default class LandingPageServices {
 
   public async deleteCostumer(costumerID: number) {
     try {
-      await this.repository.costumerRepository().delete({
+      await this.repository.costumer.delete({
         where: {
           id: costumerID,
         },

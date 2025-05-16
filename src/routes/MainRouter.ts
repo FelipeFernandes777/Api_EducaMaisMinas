@@ -13,7 +13,7 @@ export default class MainRouter {
     this.router.get("/", (_, res) => {
       res.send("Hello API").status(200);
     });
-    this.router.use("/send", this.landingPageRouter.route);
+    this.router.use("/meta", this.landingPageRouter.route);
   }
 
   public get routes() {
